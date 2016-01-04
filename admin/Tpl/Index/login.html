@@ -30,7 +30,7 @@
 <!--以上是公共部分，接下来是私有部分-->
 <script src='__PUBLIC__/JS/admin/usr.js'></script>
 <script>
-var dologin='__APP__/Usr/dologin';
+var docheckqr='__APP__/Usr/checkqr';
 </script> 
 </head>
 
@@ -48,7 +48,30 @@ var dologin='__APP__/Usr/dologin';
 	
 	<include file='Cmn:foot'/>
 </div>
-                
+<script>
+	//每隔两秒钟进行一次后台探访
+var int=self.setInterval("checkqr()",2000);
+function checkqr(){
+	$.ajax({
+        'type': 'GET',
+        'url': docheckqr,
+        'async':false,  
+        'contentType': 'application/json',
+        'data': {'tmpuid',"{$tmpuid}"},
+        'dataType': 'json',
+        'success': function(data) {
+        	if(data['rslt']==1){
+        		window.location.reload();
+        	}
+         
+            console.log("success");
+        },
+        'error':function() {
+            console.log("error");
+        }
+    });
+}
+</script>            
 
 
 

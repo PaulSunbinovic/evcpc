@@ -13,9 +13,10 @@ $appid='wx682ad2cc417fe8b9';
 $appsecret='c4c1b2004388a3a529f39fc42c0c60e9';
 $userinfo = getUserInfo($code,$appid,$appsecret);
 
+$tmpuid=$_GET['tmpuid'];
 //因为头像url是有/影响传输的，所以要encode
 $hdurl=urlencode($userinfo['headimgurl']);
-$url='http://www.evchar.cn/evcpc/admin.php/WX/certify/openid/'.$userinfo['openid'];
+$url='http://www.evchar.cn/evcpc/admin.php/WX/certify/openid/'.$userinfo['openid'].'/tmpuid/'.$tmpuid;
 
 header("location: ".$url);
 

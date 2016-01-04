@@ -5,11 +5,12 @@ class WXAction extends Action {
     	header("Content-Type:text/html; charset=utf-8");
     	$usr=D('Usr');$wx=D('WX');
     	
-    	$openid=$_GET['openid'];
+    	$openid=$_GET['openid'];$tmpuid=$_GET['tmpuid'];
     	
     	$arr_usro=$usr->get($openid);
     	if($arr_usro['code']=='A00000'){
-    		
+    		//给qr数据库写指，从而让网页端可以在扫描过程中发现验证通过了
+    		$wx->mdfqrdb($openid,$tmpuid);
     		$msg='登录成功！';
     	}else{
     		$msg=$arr_usro['msg'];

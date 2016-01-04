@@ -1,6 +1,6 @@
 <?php
 class WXModel extends Action{
-	//createQR
+	//createQR mdfqrdb($openid,$tmpuid) checkqr($tmpuid)
 	//
 	//############test
 	public function createQR(){
@@ -9,14 +9,16 @@ class WXModel extends Action{
 		$qr=M('qr');
 		//先取一个tempuid 
 		$tmpuid=time().rand(10,99);//加上随机数几乎是杜绝了统一时间一起产生的临时uid的可能性
-		$isscan='n';
+		$this->assign('tmpuid',$tmpuid);
+
+		$isscan=0;
 		$openid='';
 		$data=array('tmpuid'=>$tmpuid,'isscan'=>$isscan,'openid'=>$openid);
 		$qr->data($data)->add();
 
 		$pic='./Public/img/qr/'.$tmpuid.'.png';
 
-		$url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx682ad2cc417fe8b9&redirect_uri=http://www.evchar.cn/evcpc/oauth2_openid.php&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
+		$url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx682ad2cc417fe8b9&redirect_uri=http://www.evchar.cn/evcpc/oauth2_openid.php&response_type=code&scope=snsapi_base&state=".$tmpuid."&connect_redirect=1#wechat_redirect";
 		
 		include "phpqrcode.php";
 		
@@ -39,7 +41,31 @@ class WXModel extends Action{
 
 		return createarrok('ok',$pic,'',$info);
 	}
-	
+	###
+	public function mdfqrdb($openid,$tmpuid){
+		$info=collectinfo(__METHOD__,'$openid,$tmpuid',array($openid,$tmpuid));
+		if(isset($openid)===false){return createarrerr('error_code','openid 不能为空',$info);}
+		if(isset($tmpuid)===false){return createarrerr('error_code','tmpuid 不能为空',$info);}
+		
+		$qr=M('qr');
+		$data=array('isscan'=>1,'openid'=>$openid);
+		$qr->where("tmpuid='".$tmpuid."'")->setField($data);
+
+		return createarrok('ok','','',$info);
+	}
+	###
+	public function checkqr($tmpuid){
+		$info=collectinfo(__METHOD__,'$openid,$tmpuid',array($openid,$tmpuid));
+		if(isset($tmpuid)===false){return createarrerr('error_code','tmpuid 不能为空',$info);}
+				
+		$qr=M('qr');
+		
+		$qro=$qr->where("tmpuid='".$tmpuid."'")->find();
+		$isscan=$qro['isscan'];
+		if($isscan==1){session('openid',$qro['openid']);}
+
+		return createarrok('ok',$isscan,'',$info);
+	}
 
 } 
 ?>

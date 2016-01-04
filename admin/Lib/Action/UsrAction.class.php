@@ -4,19 +4,18 @@ class UsrAction extends Action {
 	//dologin
 	
 	//#########index
-    public function dologin(){
+    public function docheckqr(){
     	header("Content-Type:text/html; charset=utf-8");
 		    
-    	$usr=D('Usr');
+    	$wx=D('WX');
+
+        $tmpuid=$_GET['tmpuid'];
 		
-    	$usrnm=$_GET['usrnm'];
-    	$usrpw=$_GET['usrpw'];
-    	$rmb=$_GET['rmb'];
+    	$arr_isscan=$wx->checkqr($tmpuid);
+        
+        $rslt=$arr_isscan['data'];$msg=$arr_isscan['msg'];
 
-    	$arr=$usr->login($usrnm,$usrpw,$rmb);
-    	$rslt=$arr['data']['rslt'];
-    	$msg=$arr['msg'];
-
+        
     	$data['rslt']=$rslt;$data['msg']=$msg;
 		$this->ajaxReturn($data,'json');
 	}
