@@ -15,7 +15,7 @@ class UsrAction extends Action {
         
         $rslt=$arr_isscan['data'];$msg=$arr_isscan['msg'];
 
-        
+
     	$data['rslt']=$rslt;$data['msg']=$msg;
 		$this->ajaxReturn($data,'json');
 	}
