@@ -14,6 +14,7 @@ class SSModel extends Action{
 		if($openid){
 			$arr_usro=$usr->get($openid);
 			$usross=$arr_usro['data']['user'];
+			$this->assign('usross',$usross);
 		}
 		
 		return createarrok('ok',$usross,'',$info);

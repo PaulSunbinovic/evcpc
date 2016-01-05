@@ -19,4 +19,14 @@ class UsrAction extends Action {
     	$data['rslt']=$rslt;$data['msg']=$msg;
 		$this->ajaxReturn($data,'json');
 	}
+	###############
+	public function dologinout(){
+    	header("Content-Type:text/html; charset=utf-8");
+
+    	session('openid',null);
+    	$rslt=1;
+
+    	$data['arr']=$arr;$data['rslt']=$rslt;$data['msg']=$msg;
+		$this->ajaxReturn($data,'json');
+    }
 }
