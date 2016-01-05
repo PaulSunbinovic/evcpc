@@ -28,7 +28,7 @@
 <script type='text/javascript' src='__PUBLIC__/etc/cmn/cmn.js'></script>
 <link href="__PUBLIC__/etc/cmn/cmn.css" rel="stylesheet">
 <!--以上是公共部分，接下来是私有部分-->
-<script src='__PUBLIC__/JS/admin/usr.js'></script>
+<script src='__PUBLIC__/JS/admin/index.js'></script>
 <script>
 var dologin='__APP__/Usr/loginin';
 </script> 
@@ -39,8 +39,95 @@ var dologin='__APP__/Usr/loginin';
 <include file='Cmn:head'/>
  
 
-<div class='col-md-12 entity'>
-	<h1>欢迎使用！</h1>
+<div class='col-md-12 entity' style='padding-top:20px'>
+	
+	<div class='col-md-12' style='margin-bottom: 20px'>
+		<div class='col-md-2'>
+			切换组
+			<select id='groupid' >
+				<volist name='groupls' id='groupv'><option value="{$groupv['id']}">{$groupv['address']}</option></volist>
+			</select>
+			<script type="text/javascript">$('#groupid').val({$groupo['id']});</script>
+		</div>
+	</div>
+	<div class'clearfix'></div>
+	
+	<div class='col-md-12 nopadding'>
+		<div class="panel panel-default">
+		  <div class="panel-heading"><i class='glyphicon glyphicon-print'></i> 充电设备统计</div>
+		  <div class="panel-body">
+		    <div class='col-md-4'>
+				共有：<a>{$dvc_count}</a>个充电桩
+			</div>
+			<div class='col-md-4'>
+				在线：<a>{$dvc_count_online}</a>个充电桩
+			</div>
+			<div class='col-md-4'>
+				故障：<a>{$dvc_count_offline}</a>个充电桩
+			</div>
+		  </div>
+		</div>
+		
+		<div class="panel panel-success">
+		  <div class="panel-heading"><i class='glyphicon glyphicon-flash'></i> 充电情况统计</div>
+		  <div class="panel-body">
+		  	<div class='col-md-4'>
+				当期充电量：<a>{$dvc_count}</a>度
+			</div>
+			<div class='col-md-4'>
+				当期充电车辆：<a>{$dvc_count_online}</a>辆
+			</div>
+			<div class='col-md-4'>
+				当期充电时间：<a>{$dvc_count_offline}</a>小时
+			</div>
+			<div class='col-md-4'>
+				累计充电量：<a>{$dvc_count}</a>度
+			</div>
+			<div class='col-md-4'>
+				累计充电车辆：<a>{$dvc_count_online}</a>辆
+			</div>
+			<div class='col-md-4'>
+				累计充电时间：<a>{$dvc_count_offline}</a>小时
+			</div>
+		  </div>
+		</div>
+
+		<div class="panel panel-warning">
+		  <div class="panel-heading"><i class='glyphicon glyphicon-flash'></i> 充电费用统计</div>
+		  <div class="panel-body">
+		  	<div class='col-md-4'>
+				当期电费：<a>{$dvc_count}</a>元
+			</div>
+			<div class='col-md-4'>
+				当期服务费：<a>{$dvc_count_online}</a>元
+			</div>
+			<div class='col-md-4'>
+				当期利润：<a>{$dvc_count_offline}</a>元
+			</div>
+			<div class='col-md-4'>
+				累计电费：<a>{$dvc_count}</a>元
+			</div>
+			<div class='col-md-4'>
+				累计服务费：<a>{$dvc_count_online}</a>元
+			</div>
+			<div class='col-md-4'>
+				累计利润：<a>{$dvc_count_offline}</a>元
+			</div>
+		  </div>
+		</div>
+	</div>
+	<h3><small>充电相关明细：</small></h3><hr>
+	<table class='table table-hover'>
+		<thead><tr><th>设备编号</th><th>设备SN码</th><th>区域名称</th><th>设备名称</th><th>设备状态</th><th>当期充电量(度)</th><th>当期电费(元)</th><th>当期服务费(元)</th><th>当期利润(元)</th><th>备注</th></tr></thead>
+		<tbody>
+			<volist name='dvcls' id='dvcv'>
+			<tr><td>{$dvcv['id']}</td><td>{$dvcv['sn']}</td><td>{$groupo['address']}</td><td>{$dvcv['address']}</td>
+			<td>{$dvcv['stts']}</td><td>xx度</td><td>20.0</td><td>fwf</td><td>dqlr</td><td>bezhu</td>
+			</tr>
+			</volist>
+		</tbody>
+	</table>
+	
 </div>
 <div class='clearfix'></div>
 

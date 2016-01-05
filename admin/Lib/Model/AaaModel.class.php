@@ -10,7 +10,13 @@ class AaaModel extends Action{
 		return createarrerr('error_code','',$info);
 		return createarrok('ok',$data,'',$info);
 	}
-	
+	########MODEL########################
+	public function testjava($id){
+		$url=C('javaback').'';
+		$json='';
+		$arr=url2arr($url,$json);
+		return $arr;
+	}
 
 } 
 ?>
