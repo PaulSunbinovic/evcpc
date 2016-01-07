@@ -57,13 +57,13 @@ var dologin='__APP__/Usr/loginin';
 		  <div class="panel-heading"><i class='glyphicon glyphicon-print'></i> 充电设备统计</div>
 		  <div class="panel-body">
 		    <div class='col-md-4'>
-				共有：<a>{$dvc_count}</a>个充电桩
+				共有：<a>{$deviceStatistics['deviceNumber']}</a>个充电桩
 			</div>
 			<div class='col-md-4'>
-				在线：<a>{$dvc_count_online}</a>个充电桩
+				在线：<a>{$deviceStatistics['onlineNumber']}</a>个充电桩
 			</div>
 			<div class='col-md-4'>
-				故障：<a>{$dvc_count_offline}</a>个充电桩
+				故障：<a>{$deviceStatistics['exceptionNumber']}</a>个充电桩
 			</div>
 		  </div>
 		</div>
@@ -72,46 +72,46 @@ var dologin='__APP__/Usr/loginin';
 		  <div class="panel-heading"><i class='glyphicon glyphicon-flash'></i> 充电情况统计</div>
 		  <div class="panel-body">
 		  	<div class='col-md-4'>
-				当期充电量：<a>{$dvc_count}</a>度
+				当期充电量：<a>{$nowPowerStatistics['powers']}</a>度
 			</div>
 			<div class='col-md-4'>
-				当期充电车辆：<a>{$dvc_count_online}</a>辆
+				当期充电车辆：<a>{$nowPowerStatistics['cars']}</a>辆
 			</div>
 			<div class='col-md-4'>
-				当期充电时间：<a>{$dvc_count_offline}</a>小时
+				当期充电时间：<a>{$nowPowerStatistics['times']}</a>小时
 			</div>
 			<div class='col-md-4'>
-				累计充电量：<a>{$dvc_count}</a>度
+				累计充电量：<a>{$totalPowerStatistics['powers']}</a>度
 			</div>
 			<div class='col-md-4'>
-				累计充电车辆：<a>{$dvc_count_online}</a>辆
+				累计充电车辆：<a>{$totalPowerStatistics['cars']}</a>辆
 			</div>
 			<div class='col-md-4'>
-				累计充电时间：<a>{$dvc_count_offline}</a>小时
+				累计充电时间：<a>{$totalPowerStatistics['times']}</a>小时
 			</div>
 		  </div>
 		</div>
 
 		<div class="panel panel-warning">
-		  <div class="panel-heading"><i class='glyphicon glyphicon-flash'></i> 充电费用统计</div>
+		  <div class="panel-heading"><i class='glyphicon glyphicon-yen'></i> 充电费用统计</div>
 		  <div class="panel-body">
 		  	<div class='col-md-4'>
-				当期电费：<a>{$dvc_count}</a>元
+				当期电费：<a>{$totalPriceStatistics['nowPowerPrice']}</a>元
 			</div>
 			<div class='col-md-4'>
-				当期服务费：<a>{$dvc_count_online}</a>元
+				当期服务费：<a>{$totalPriceStatistics['nowOtherPrice']}</a>元
 			</div>
 			<div class='col-md-4'>
-				当期利润：<a>{$dvc_count_offline}</a>元
+				当期利润：<a>{$totalPriceStatistics['totalOtherPrice']}</a>元
 			</div>
 			<div class='col-md-4'>
-				累计电费：<a>{$dvc_count}</a>元
+				累计电费：<a>{$totalPriceStatistics['totalPowerPrice']}</a>元
 			</div>
 			<div class='col-md-4'>
-				累计服务费：<a>{$dvc_count_online}</a>元
+				累计服务费：<a>{$totalPriceStatistics['nowEarnings']}</a>元
 			</div>
 			<div class='col-md-4'>
-				累计利润：<a>{$dvc_count_offline}</a>元
+				累计利润：<a>{$totalPriceStatistics['totalEarnings']}</a>元
 			</div>
 		  </div>
 		</div>
@@ -120,9 +120,9 @@ var dologin='__APP__/Usr/loginin';
 	<table class='table table-hover'>
 		<thead><tr><th>设备编号</th><th>设备SN码</th><th>区域名称</th><th>设备名称</th><th>设备状态</th><th>当期充电量(度)</th><th>当期电费(元)</th><th>当期服务费(元)</th><th>当期利润(元)</th><th>备注</th></tr></thead>
 		<tbody>
-			<volist name='dvcls' id='dvcv'>
-			<tr><td>{$dvcv['id']}</td><td>{$dvcv['sn']}</td><td>{$groupo['address']}</td><td>{$dvcv['address']}</td>
-			<td>{$dvcv['stts']}</td><td>xx度</td><td>20.0</td><td>fwf</td><td>dqlr</td><td>bezhu</td>
+			<volist name='detailsList' id='detailsv'>
+			<tr><td>{$detailsv['deviceId']}</td><td>{$detailsv['deviceSn']}</td><td>{$groupo['address']}</td><td>{$detailsv['deviceAddress']}</td>
+			<td>{$detailsv['deviceState']}</td><td>{$detailsv['nowPower']}</td><td>{$detailsv['nowPowerPrice']}</td><td>{$detailsv['nowOtherPrice']}</td><td>{$detailsv['nowEarningsPrice']}</td><td>{$detailsv['proportion']}</td>
 			</tr>
 			</volist>
 		</tbody>
