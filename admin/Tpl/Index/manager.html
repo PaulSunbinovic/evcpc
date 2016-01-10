@@ -48,7 +48,9 @@ var dologin='__APP__/Usr/loginin';
 				<volist name='groupls' id='groupv'><option value="{$groupv['id']}">{$groupv['address']}</option></volist>
 			</select>
 			<script type="text/javascript">$('#groupid').val({$groupo['id']});</script>
+
 		</div>
+		<div class='col-md-2'><a onclick='window.location.reload()'><i class='glyphicon glyphicon-refresh'></i> 手动刷新</a></div>
 	</div>
 	<div class'clearfix'></div>
 	
