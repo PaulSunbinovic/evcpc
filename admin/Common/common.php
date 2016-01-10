@@ -119,4 +119,9 @@ function createcode($cd){
 	}
 	return $code;
 }
+#######
+function ms2hour($s){
+	$hour=$s/3600;
+	return  $hour;
+}
 ?>

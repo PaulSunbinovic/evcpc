@@ -73,10 +73,14 @@ class IndexAction extends Action {
 			$this->assign('deviceStatistics',$arr['data']);
 
 			$arr=$b2b->getNowPowerStatistics($groupid);
-			$this->assign('nowPowerStatistics',$arr['data']);
+			$data=$arr['data'];
+			$data['times']=ms2hour($data['times']);
+			$this->assign('nowPowerStatistics',$data);
 
 			$arr=$b2b->getTotalPowerStatistics($groupid);
-			$this->assign('totalPowerStatistics',$arr['data']);
+			$data=$arr['data'];
+			$data['times']=ms2hour($data['times']);
+			$this->assign('totalPowerStatistics',$data);
 
 			$arr=$b2b->getTotalPriceStatistics($groupid,$openid);
 			$this->assign('totalPriceStatistics',$arr['data']);
